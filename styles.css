@@ -1,0 +1,63 @@
+body {
+	background-color: black;
+	overflow: hidden;
+	margin: 0px;
+}
+
+canvas {
+	position: absolute;
+	z-index: 1;
+}
+
+.sideNav {
+	padding: 10px;
+	position: absolute;
+	z-index: 9;
+	width: 20%;
+	height: 100%;
+	background-color: #fff;
+	overflow: auto;
+	box-shadow: 2px 2px 3px #888888;
+
+}
+
+.open {
+	/*transform: translateX(0%);*/
+	animation-name: sidenavAnimOpen;
+	animation-duration: .3s;
+}
+
+.closed {
+	transform: translateX(-100%);
+	animation-name: sidenavAnimClose;
+	animation-duration: .3s;
+}
+
+.electron {
+	color: red;
+}
+
+.proton {
+	color: blue;
+
+}
+
+@keyframes sidenavAnimOpen {
+	from {
+		transform: translateX(-100%);
+	}
+
+	to {
+		transform: translateX(0%);
+	}
+}
+
+@keyframes sidenavAnimClose {
+	from {
+		transform: translateX(0%);
+	}
+
+	to {
+		transform: translateX(-100%);
+	}
+}

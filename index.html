@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Atractors</title>
+        <link rel="stylesheet" href="styles.css" />
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    </head>
+    <body onload="setInterval(draw,1000/30)" onkeypress="keyPressed(event)">
+        <canvas
+            onclick="addPar(event)"
+            style=""
+            id="canvas"
+            onmousemove="handleMouseMove(event)"
+        ></canvas>
+
+        <div onload="info()" class="sideNav open" id="sideNav">
+            <p id="pi">Information</p>
+            <br />
+            Show field
+            <input
+                type="checkbox"
+                onchange="setshowFl(event)"
+                id="campo"
+                checked="true"
+            /><br /><br />
+            K<input
+                type="range"
+                min="0.1"
+                max="100000"
+                step="0.1"
+                oninput="setConstant(this.value)"
+            /><br />
+            <div id="stats"></div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="particles.js"></script>
+        <script type="text/javascript" src="menu.js"></script>
+        <script type="text/javascript">
+            alert(
+                "Usage\nSpace: Pause / Play simulation\nEnter: Open/ Close the property panel\nLeft click: Spawn a point charge"
+            );
+        </script>
+    </body>
+</html>
