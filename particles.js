@@ -163,8 +163,8 @@ function draw() {
                 let flhere = accs[j + i * cols];
                 ctx.fillStyle =
                     flhere < 0
-                        ? "hsl(" + accs[j + i * cols] + ", 100%, 50%)"
-                        : "hsl(" + accs[j + i * cols] + ", 100%, 50%)";
+                        ? "hsl(" + (120 + accs[j + i * cols]) + ", 100%, 50%)"
+                        : "hsl(" + (120 + accs[j + i * cols]) + ", 100%, 50%)";
                 ctx.beginPath();
                 ctx.arc(
                     j * flSize,
@@ -172,7 +172,7 @@ function draw() {
                         Math.sqrt(accs[j + i * cols]) *
                             Math.sign(accs[j + i * cols]) *
                             2,
-                    5,
+                    3,
                     0,
                     Math.PI * 2
                 );
