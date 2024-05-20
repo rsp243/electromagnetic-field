@@ -73,19 +73,19 @@ function Particle(x, y, m, q, s, id) {
                     -acMag *
                     Math.cos(
                         Math.PI +
-                            Math.atan2(
-                                this.pos.y - p.pos.y,
-                                this.pos.x - p.pos.x
-                            )
+                        Math.atan2(
+                            this.pos.y - p.pos.y,
+                            this.pos.x - p.pos.x
+                        )
                     );
                 this.acc.y +=
                     -acMag *
                     Math.sin(
                         Math.PI +
-                            Math.atan2(
-                                this.pos.y - p.pos.y,
-                                this.pos.x - p.pos.x
-                            )
+                        Math.atan2(
+                            this.pos.y - p.pos.y,
+                            this.pos.x - p.pos.x
+                        )
                     );
             }
         });
@@ -169,9 +169,9 @@ function draw() {
                 ctx.arc(
                     j * flSize,
                     i * flSize +
-                        Math.sqrt(accs[j + i * cols]) *
-                            Math.sign(accs[j + i * cols]) *
-                            2,
+                    Math.sqrt(accs[j + i * cols]) *
+                    Math.sign(accs[j + i * cols]) *
+                    2,
                     3,
                     0,
                     Math.PI * 2
@@ -193,7 +193,7 @@ function draw() {
     if (pause) {
         ctx.fillStyle = "black";
         ctx.fillText(
-            "El campo aquí es: " + getField(cursor.x, cursor.y),
+            "El campo aquí es: " + getField(cursor.x, cursor.y), // position of field?
             cursor.x,
             cursor.y
         );
