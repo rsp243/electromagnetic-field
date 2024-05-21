@@ -11,12 +11,8 @@ function setConstant(k) {
 }
 
 function setParAtt(inp, val) {
-    console.log(inp)
-    console.log(val)
     let att = inp.classList[0];
-    console.log(att);
     let p = inp.parentNode.parentNode.parentParticle;
-    console.log(p);
     if (typeof p[att] == "number" || typeof p[att] == "string") {
         p[att] = val;
         let inputs = inp.parentNode.getElementsByClassName(att);
@@ -25,15 +21,18 @@ function setParAtt(inp, val) {
         }
     } else if (typeof p[att] == "boolean") {
         if (val) {
-            let spdIn = inp.parentNode.getElementsByClassName("spd");
-            console.log(inp.parentNode.parentNode);
-            for (let i = 0; i < spdIn.length; i++) {
-                spdIn[i].style.display = "none";
+            if (att == "isStatic") {
+                let spdIn = inp.parentNode.parentNode.getElementsByClassName("spd");
+                for (let i = 0; i < spdIn.length; i++) {
+                    spdIn[i].disabled = true;
+                }
+            } else {
+                inp.parentNode.parentNode.style.display = "none"; // display node to the row
             }
         } else {
-            let spdIn = inp.parentNode.getElementsByClassName("spd");
+            let spdIn = inp.parentNode.parentNode.getElementsByClassName("spd");
             for (let i = 0; i < spdIn.length; i++) {
-                spdIn[i].style.display = "block";
+                spdIn[i].disabled = false;
             }
         }
         p[att] = val;
@@ -53,7 +52,6 @@ function addPar(e) {
     );
     nP.infoTr = document.createElement("tr");
     nP.infoTr.parentParticle = nP;
-    console.log(nP.infoTr)
     particles.push(nP);
     document.getElementById("stats").appendChild(nP.infoTr);
     setInfoDiv(pause);
@@ -65,7 +63,6 @@ function particleData(particleNum, particleAcc) {
 }
 
 function keyPressed(e) {
-    console.log(e.keyCode);
     if (e.keyCode == 101) {
         showFl = !showFl;
         document.getElementById("campo").checked = showFl;
@@ -96,9 +93,8 @@ function updateData() {
                 <td>${p.q}</td>
                 <td>${p.pos.x.toFixed(3)}</td>
                 <td>${p.pos.y.toFixed(3)}</td>
-                ${!p.isStatic ? `
-                    <td>${p.spd.x.toFixed(3)}</td> <td>${p.spd.y.toFixed(3)}</td>` : `<td></td><td></td>`}
-                <td><input type = 'button' class = 'isDead' value = 'Delete' onclick = 'setParAtt(this,true)'></td>
+                ${!p.isStatic ? `<td>${p.spd.x.toFixed(3)}</td> <td>${p.spd.y.toFixed(3)}</td>` : `<td></td><td></td>`}
+                <td><input type='button' class='isDead' value='Delete' onclick='setParAtt(this,true)' title="Enter edit mode to delete particles" disabled></td>
 				`;
         });
     }
@@ -107,10 +103,8 @@ function updateData() {
 function setInfoDiv(paused) {
     if (paused) {
         particles.forEach((p) => {
-            console.log(p)
-            // console.log(p.infoTr)
             p.infoTr.innerHTML = `
-                <td valign="middle" align="center">${p.id}</td>
+                <td scope="row" valign="middle" align="center">${p.id}</td>
                 <td valign="middle" align="center"><input type='checkbox' class='isStatic' ${p.isStatic ? "checked" : ""} onchange=setParAtt(this,this.checked) /></td>
                 <td valign="middle" align="center"><input type='text' class='q form-text' value=${p.q} onkeyup=setParAtt(this,this.value) />
                 <input type='range' class='q' step='0.01' min='-1' max=1 value=${p.q} oninput=setParAtt(this,this.value) /></td>
@@ -118,9 +112,8 @@ function setInfoDiv(paused) {
                 <td valign="middle" align="center"><input type='num' class='pos y form-text' value='${p.pos.y.toFixed(3)}' onkeyup=setParAtt(this,this.value) /></td>
                 <td valign="middle" align="center"><input type='num' class='spd x form-text' value=${p.spd.x.toFixed(3)} onkeyup=setParAtt(this,this.value) /></td>
                 <td valign="middle" align="center"><input type='num' class='spd y form-text' value=${p.spd.y.toFixed(3)} onkeyup=setParAtt(this,this.value) /></td>
-                <td valign="middle" align="center"><input type='button' class='isDead' value='Borrar' onclick='setParAtt(this,true)'></td>
+                <td valign="middle" align="center"><input type='button' class='isDead' value='Delete' onclick='setParAtt(this,true)'></td>
 			`;
-            // console.log(p.infoTr)
         });
     }
 }

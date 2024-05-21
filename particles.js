@@ -90,7 +90,7 @@ function Particle(x, y, m, q, s, id) {
             }
         });
         if (this.isDead) {
-            this.infoDiv.parentNode.removeChild(this.infoDiv);
+            this.infoTr.parentNode.removeChild(this.infoTr);
             return false;
         }
         return true;

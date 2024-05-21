@@ -77,3 +77,8 @@ canvas {
 .stats-table {
 	overflow-x: auto;
 }
+
+.stats-table table thead tr th {
+	line-height:1; 
+	white-space:nowrap;
+}
