@@ -13,12 +13,11 @@ canvas {
 	padding: 10px;
 	position: absolute;
 	z-index: 9;
-	width: 20%;
+	width: 30%;
 	height: 100%;
 	background-color: #fff;
 	overflow: auto;
 	box-shadow: 2px 2px 3px #888888;
-
 }
 
 .open {
@@ -60,4 +59,26 @@ canvas {
 	to {
 		transform: translateX(-100%);
 	}
+}
+
+.setting {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+
+#sideNav {
+	font-size: 16px;
+	font-family: 'Roboto' sans-serif;
+	font-style: normal;
+	font-weight: 300;
+}
+
+.stats-table {
+	overflow-x: auto;
+}
+
+.stats-table table thead tr th {
+	line-height:1; 
+	white-space:nowrap;
 }
