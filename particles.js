@@ -33,6 +33,9 @@ function Particle(x, y, m, q, s, id) {
     this.isDead = false;
     //Función a ser llama para actualizar la particula
     this.update = function () {
+        if (this.isDead) {
+            return false;
+        }
         //Guarda la posición previa
         this.prevPos = this.pos;
         //Actualiza la posición si no eres estática
@@ -89,10 +92,6 @@ function Particle(x, y, m, q, s, id) {
                     );
             }
         });
-        if (this.isDead) {
-            this.infoTr.parentNode.removeChild(this.infoTr);
-            return false;
-        }
         return true;
     };
     //Función a ser llamada para dibujar la particula en el contexto gráfico de un canvas
