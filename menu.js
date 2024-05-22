@@ -27,7 +27,8 @@ function setParAtt(inp, val) {
                     spdIn[i].disabled = true;
                 }
             } else {
-                inp.parentNode.parentNode.style.display = "none"; // display node to the row
+                // inp.parentNode.parentNode.style.display = "none"; // display node to the row
+                inp.parentNode.parentNode.parentNode.removeChild(inp.parentNode.parentNode);
             }
         } else {
             let spdIn = inp.parentNode.parentNode.getElementsByClassName("spd");
@@ -36,6 +37,8 @@ function setParAtt(inp, val) {
             }
         }
         p[att] = val;
+        p.update();
+        particles.splice(particles.indexOf(p), 1);
     } else if (typeof p[att] == "object") {
         p[att][inp.classList[1]] = parseInt(val);
     }
