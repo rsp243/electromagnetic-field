@@ -10,9 +10,10 @@ let ps = [];
 let showFl = true;
 let flSize = 15;
 let pause = false;
+let currentId = 0;
 
 //Objeto particula
-function Particle(x, y, m, q, s, id) {
+function Particle(x, y, m, q, s) {
     //Posición actual
     this.pos = { x: x, y: y };
     //Posición previa (Para dibujar una línea entre la posición acutal y la previa)
@@ -28,7 +29,8 @@ function Particle(x, y, m, q, s, id) {
     //Es estática
     this.isStatic = s;
     //Identificador
-    this.id = id;
+    this.id = currentId;
+    currentId++;
     //Estás vivo
     this.isDead = false;
     //Función a ser llama para actualizar la particula
