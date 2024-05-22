@@ -24,21 +24,20 @@ function setParAtt(inp, val) {
             if (att == "isStatic") {
                 let spdIn = inp.parentNode.parentNode.getElementsByClassName("spd");
                 for (let i = 0; i < spdIn.length; i++) {
-                    spdIn[i].disabled = true;
+                    spdIn[i].style.display = "none";
                 }
             } else {
                 // inp.parentNode.parentNode.style.display = "none"; // display node to the row
                 inp.parentNode.parentNode.parentNode.removeChild(inp.parentNode.parentNode);
+                particles.splice(particles.indexOf(p), 1);
             }
         } else {
             let spdIn = inp.parentNode.parentNode.getElementsByClassName("spd");
             for (let i = 0; i < spdIn.length; i++) {
-                spdIn[i].disabled = false;
+                spdIn[i].style.display = "block";
             }
         }
         p[att] = val;
-        p.update();
-        particles.splice(particles.indexOf(p), 1);
     } else if (typeof p[att] == "object") {
         p[att][inp.classList[1]] = parseInt(val);
     }
@@ -51,7 +50,6 @@ function addPar(e) {
         10000000,
         1,
         false,
-        particles.length
     );
     nP.infoTr = document.createElement("tr");
     nP.infoTr.parentParticle = nP;
