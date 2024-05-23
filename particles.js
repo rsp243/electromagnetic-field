@@ -78,19 +78,19 @@ function Particle(x, y, m, q, s) {
                     -acMag *
                     Math.cos(
                         Math.PI +
-                        Math.atan2(
-                            this.pos.y - p.pos.y,
-                            this.pos.x - p.pos.x
-                        )
+                            Math.atan2(
+                                this.pos.y - p.pos.y,
+                                this.pos.x - p.pos.x
+                            )
                     );
                 this.acc.y +=
                     -acMag *
                     Math.sin(
                         Math.PI +
-                        Math.atan2(
-                            this.pos.y - p.pos.y,
-                            this.pos.x - p.pos.x
-                        )
+                            Math.atan2(
+                                this.pos.y - p.pos.y,
+                                this.pos.x - p.pos.x
+                            )
                     );
             }
         });
@@ -164,9 +164,9 @@ function draw() {
                 ctx.arc(
                     j * flSize,
                     i * flSize +
-                    Math.sqrt(accs[j + i * cols]) *
-                    Math.sign(accs[j + i * cols]) *
-                    2,
+                        Math.sqrt(accs[j + i * cols]) *
+                            Math.sign(accs[j + i * cols]) *
+                            2,
                     3,
                     0,
                     Math.PI * 2
@@ -201,7 +201,10 @@ function getContext(c) {
 function getField(x, y) {
     let output = 0;
     for (let i = 0; i < particles.length; i++) {
-        let d = Math.hypot(x - particles[i].pos.x, y - particles[i].pos.y + (particles[i].sizeInPx * 2));
+        let d = Math.hypot(
+            x - particles[i].pos.x,
+            y - particles[i].pos.y + particles[i].sizeInPx * 2
+        );
         d = constrain(d, 1, 500);
         if (d != 0) {
             let acMag;

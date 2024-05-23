@@ -23,7 +23,6 @@ canvas {
 }
 
 .open {
-	/*transform: translateX(0%);*/
 	animation-name: sidenavAnimOpen;
 	animation-duration: .3s;
 }
