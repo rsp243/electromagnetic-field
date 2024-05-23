@@ -63,20 +63,24 @@ function particleData(particleNum, particleAcc) {
     this.particleAcc = particleAcc;
 }
 
+function showHideMenu() {
+    var sideNav = document.getElementById("sideNav");
+    if (sideNav.classList.contains("open")) {
+        sideNav.classList.remove("open");
+        sideNav.classList.add("closed");
+    } else {
+        sideNav.classList.remove("closed");
+        sideNav.classList.add("open");
+    }
+}
+
 function keyPressed(e) {
     if (e.keyCode == 101) {
         showFl = !showFl;
         document.getElementById("campo").checked = showFl;
     }
     if (e.keyCode == 13) {
-        var sideNav = document.getElementById("sideNav");
-        if (sideNav.classList.contains("open")) {
-            sideNav.classList.remove("open");
-            sideNav.classList.add("closed");
-        } else {
-            sideNav.classList.remove("closed");
-            sideNav.classList.add("open");
-        }
+        showHideMenu();
     } else if (e.keyCode == 32) {
         pause = !pause;
         setInfoDiv(pause);
@@ -117,3 +121,12 @@ function setInfoDiv(paused) {
         });
     }
 }
+
+document.getElementById("pauseBtn").addEventListener("click", () => {
+    pause = !pause;
+    setInfoDiv(pause);
+});
+
+document.getElementById("menuBtn").addEventListener("click", () => {
+    showHideMenu();
+});
