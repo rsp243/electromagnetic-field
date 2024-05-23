@@ -34,6 +34,7 @@ function Particle(x, y, m, q, s) {
     // Жива ли
     this.isDead = false;
     // Функция, которую нужно вызвать для обновления частицы
+    this.sizeInPx = 15;
     this.update = function () {
         if (this.isDead) {
             return false;
@@ -107,7 +108,7 @@ function Particle(x, y, m, q, s) {
         ctx.lineWidth = 1;
         this.hue += 0.1;
         ctx.beginPath();
-        ctx.arc(this.pos.x, this.pos.y, 15, 0, 2 * Math.PI);
+        ctx.arc(this.pos.x, this.pos.y, this.sizeInPx, 0, 2 * Math.PI);
         ctx.fill();
     };
 }
@@ -199,7 +200,7 @@ function getContext(c) {
 function getField(x, y) {
     let output = 0;
     for (let i = 0; i < particles.length; i++) {
-        let d = Math.hypot(x - particles[i].pos.x, y - particles[i].pos.y);
+        let d = Math.hypot(x - particles[i].pos.x, y - particles[i].pos.y + (particles[i].sizeInPx * 2));
         d = constrain(d, 1, 500);
         if (d != 0) {
             let acMag;
