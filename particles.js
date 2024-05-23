@@ -33,8 +33,9 @@ function Particle(x, y, m, q, s) {
     currentId++;
     // Жива ли
     this.isDead = false;
-    // Функция, которую нужно вызвать для обновления частицы
+    // Размер в пикселях для отрисовки
     this.sizeInPx = 15;
+    // Функция, которую нужно вызвать для обновления частицы
     this.update = function () {
         if (this.isDead) {
             return false;
