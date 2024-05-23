@@ -1,78 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Atractors</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet"
+        />
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <title>Atractors</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
-</head>
+    <body onload="setInterval(draw,1000/30)" onkeypress="keyPressed(event)">
+        <canvas
+            onclick="addPar(event)"
+            style=""
+            id="canvas"
+            onmousemove="handleMouseMove(event)"
+        ></canvas>
 
-<body onload="setInterval(draw,1000/30)" onkeypress="keyPressed(event)">
-    <canvas onclick="addPar(event)" style="" id="canvas" onmousemove="handleMouseMove(event)"></canvas>
-
-    <div onload="info()" class="sideNav open" id="sideNav">
-        <p id="pi">Information Panel</p>
-        <div class="setting-block">
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Settings block</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">Show field</th>
-                        <td align="center">
-                            <input class="mx-auto" type="checkbox" onchange="setshowFl(event)" id="campo"
-                                checked="true" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">K</th>
-                        <td align="center">
-                            <input class="mx-auto" type="range" min="0.1" max="100000" step="0.1"
-                                oninput="setConstant(this.value)" />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="stats-block">
-            <p>Info table about particles</p>
-            <div class="stats-table">
-                <table class="table table-striped table-hover" cellpadding="0" cellspacing="1" width="100%">
+        <div onload="info()" class="sideNav open" id="sideNav">
+            <p id="pi">Information Panel</p>
+            <div class="setting-block">
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">№</th>
-                            <th scope="col">isStatic</th>
-                            <th scope="col">Charge</th>
-                            <th scope="col">X Position</th>
-                            <th scope="col">Y Position</th>
-                            <th scope="col">X Velocity</th>
-                            <th scope="col">Y Velocity</th>
-                            <th scope="col">Delete</th>
+                            <th scope="col">Settings block</th>
                         </tr>
                     </thead>
-                    <tbody id="stats"></tbody>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Show field</th>
+                            <td align="center">
+                                <input
+                                    class="mx-auto"
+                                    type="checkbox"
+                                    onchange="setshowFl(event)"
+                                    id="campo"
+                                    checked="true"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">K</th>
+                            <td align="center">
+                                <input
+                                    class="mx-auto"
+                                    type="range"
+                                    min="0.1"
+                                    max="100000"
+                                    step="0.1"
+                                    oninput="setConstant(this.value)"
+                                />
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
+
+            <div class="stats-block">
+                <p>Info table about particles</p>
+                <div class="stats-table">
+                    <table
+                        class="table table-striped table-hover"
+                        cellpadding="0"
+                        cellspacing="1"
+                        width="100%"
+                    >
+                        <thead>
+                            <tr>
+                                <th scope="col">№</th>
+                                <th scope="col">isStatic</th>
+                                <th scope="col">Charge</th>
+                                <th scope="col">X Position</th>
+                                <th scope="col">Y Position</th>
+                                <th scope="col">X Velocity</th>
+                                <th scope="col">Y Velocity</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stats"></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="particles.js"></script>
-    <script type="text/javascript" src="menu.js"></script>
-    <script type="text/javascript">
-        alert(
-            "Usage instructions \nSpace: Pause / Play simulation \nEnter: Open/ Close the setting panel \nLeft click: Spawn a point charge"
-        );
-    </script>
-</body>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="particles.js"></script>
+        <script type="text/javascript" src="menu.js"></script>
+        <script type="text/javascript">
+            alert(
+                "Usage instructions \nSpace: Pause / Play simulation \nEnter: Open/ Close the setting panel \nLeft click: Spawn a point charge"
+            );
+        </script>
+    </body>
 </html>
