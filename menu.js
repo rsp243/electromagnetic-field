@@ -117,8 +117,8 @@ function setInfoDiv(paused) {
                 <input type='range' class='q' step='0.01' min='-1' max=1 value=${p.q} oninput=setParAtt(this,this.value) /></td>
                 <td valign="middle" align="center"><input type='num' class='pos x form-text' value='${p.pos.x.toFixed(3)}' onkeyup=setParAtt(this,this.value) /></td>
                 <td valign="middle" align="center"><input type='num' class='pos y form-text' value='${p.pos.y.toFixed(3)}' onkeyup=setParAtt(this,this.value) /></td>
-                <td valign="middle" align="center"><input type='num' class='spd x form-text' value=${p.spd.x.toFixed(3)} onkeyup=setParAtt(this,this.value) /></td>
-                <td valign="middle" align="center"><input type='num' class='spd y form-text' value=${p.spd.y.toFixed(3)} onkeyup=setParAtt(this,this.value) /></td>
+                <td valign="middle" align="center"><input type='num' class='spd x form-text' value=${p.spd.x.toFixed(3)} onkeyup=setParAtt(this,this.value) style='display: ${p.isStatic ? 'none' : 'block'};' /></td>
+                <td valign="middle" align="center"><input type='num' class='spd y form-text' value=${p.spd.y.toFixed(3)} onkeyup=setParAtt(this,this.value) style='display: ${p.isStatic ? 'none' : 'block'};' /></td>
                 <td valign="middle" align="center"><input type='button' class='isDead' value='Delete' onclick='setParAtt(this,true)'></td>
 			`;
         });
