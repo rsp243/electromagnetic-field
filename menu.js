@@ -70,7 +70,6 @@ function keyPressed(e) {
     }
     if (e.keyCode == 13) {
         var sideNav = document.getElementById("sideNav");
-        //sideNav.appendChild(div);
         if (sideNav.classList.contains("open")) {
             sideNav.classList.remove("open");
             sideNav.classList.add("closed");

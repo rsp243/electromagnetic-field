@@ -12,68 +12,66 @@ let flSize = 15;
 let pause = false;
 let currentId = 0;
 
-//Objeto particula
+// Объект частицы
 function Particle(x, y, m, q, s) {
-    //Posición actual
+    // Фактическое положение
     this.pos = { x: x, y: y };
-    //Posición previa (Para dibujar una línea entre la posición acutal y la previa)
+    // Предыдущая позиция
     this.prevPos = this.pos;
-    //Masa
+    // Масса
     this.m = m;
-    //Carga
+    // Заряд
     this.q = q;
-    //Vector velocidad
+    // Векторная скорость
     this.spd = { x: 0, y: 0 };
-    //Vector aceleración
+    // Векторное ускорение
     this.acc = { x: 0, y: 0 };
-    //Es estática
+    // Статична ли
     this.isStatic = s;
-    //Identificador
+    // ID
     this.id = currentId;
     currentId++;
-    //Estás vivo
+    // Жива ли
     this.isDead = false;
-    //Función a ser llama para actualizar la particula
+    // Функция, которую нужно вызвать для обновления частицы
     this.update = function () {
         if (this.isDead) {
             return false;
         }
-        //Guarda la posición previa
+        // Сохраняем предыдущую позицию
         this.prevPos = this.pos;
-        //Actualiza la posición si no eres estática
+        // Обновляем позицию, если эта частица не статична
         if (!this.isStatic) {
             this.pos.x += this.spd.x;
             this.pos.y += this.spd.y;
         }
-        //Si su posisión está fuera del canvas, cambia de dirección (Multiplica velocidad por -1)
+        // Если ваша позиция находится за пределами канваса, сделать отскок (умножьте скорость на -1)
         this.spd.x *= this.pos.x < 0 || this.pos.x > C.width ? -1 : 1;
         this.pos.x =
             this.pos.x < 0 ? 0 : this.pos.x > C.width ? C.width : this.pos.x;
         this.spd.y *= this.pos.y < 0 || this.pos.y > C.height ? -1 : 1;
         this.pos.y =
             this.pos.y < 0 ? 0 : this.pos.y > C.height ? C.height : this.pos.y;
-        //Actualiza velocidad
+        // Скорость обновления
         this.spd.x += this.acc.x;
         this.spd.y += this.acc.y;
-        //Calcula la aceleración basado en las otras partículas o algún otro factor
         this.acc.x = 0;
         this.acc.y = 0;
-        //Para cada particula p
         particles.forEach((p) => {
-            //Calcula la distancia entre tu posición y la de p
+            // Рассчёт расстояние между вашим положением и положением p
             let d = Math.hypot(this.pos.x - p.pos.x, this.pos.y - p.pos.y);
-            //Restringe la distancia entre dos valores, para que la fuerza no sea muy grande ni muy pequeña
+            // Ограничивает расстояние между двумя значениями, чтобы сила не была ни слишком большой, ни слишком маленькой
             d = constrain(d, 50, 300);
-            //Si la distancia no es cero (P eres tú)
+            // Если расстояние не равно нулю
             if (d != 0) {
-                //Calcula la magnitud de la fuerza de atracción o repulsión entre tú y p con la formula
+                // Рассчитайте величину силы притяжения или отталкивания между вами и p по формуле
                 let acMag;
                 if (modeA == 0) {
                     acMag = (G * p.m) / (d * d);
                 } else {
                     acMag = (K * this.q * p.q) / (d * d);
                 }
-                //Agrega esa fuerza a la aceleración total (Componentes rectangulares)
+                // Добавьте эту силу к общему ускорению
                 this.acc.x +=
                     -acMag *
                     Math.cos(
@@ -96,25 +94,19 @@ function Particle(x, y, m, q, s) {
         });
         return true;
     };
-    //Función a ser llamada para dibujar la particula en el contexto gráfico de un canvas
+    // Функция, которую нужно вызвать для рисования частицы в графическом контексте холста.
     this.display = function (ctx) {
-        //Si la carga es negativa
+        // Покрас частицы в зависимости от заряда
         if (this.q < 0) {
-            //Fija el color a rojo
             ctx.fillStyle = "rgb(255, 0, 0)";
         } else if (this.q > 0) {
-            //Si es positiva, fija el color a azul
             ctx.fillStyle = "rgb(0, 0, 255)";
         } else {
-            //Si es cero, fija el color a verde
             ctx.fillStyle = "rgb(0, 255, 0)";
         }
         ctx.lineWidth = 1;
         this.hue += 0.1;
-        //Dibuja un círculo en la posición actual
         ctx.beginPath();
-        //ctx.moveTo(this.prev.x,this.prev.y);
-        //ctx.lineTo(this.x,this.y);
         ctx.arc(this.pos.x, this.pos.y, 15, 0, 2 * Math.PI);
         ctx.fill();
     };
@@ -178,15 +170,8 @@ function draw() {
                     Math.PI * 2
                 );
                 ctx.fill();
-                //ctx.fillRect(j * flSize, i * flSize, flSize, flSize);
-                //let rgb = hslToRgb(accs[j + i * cols], 1, 0.9);
-                //img.data[(j + i * cols) * 4 + 0] = rgb[0] * 255;
-                //img.data[(j + i * cols) * 4 + 1] = rgb[1] * 255;
-                //img.data[(j + i * cols) * 4 + 2] = rgb[2] * 255;
-                //img.data[(j + i * cols) * 4 + 3] = 255;
             }
         }
-        //ctx.putImageData(img, 0, 0);
     }
     particles.forEach((p) => {
         p.display(ctx);
@@ -194,14 +179,12 @@ function draw() {
     if (pause) {
         ctx.fillStyle = "black";
         ctx.fillText(
-            "El campo aquí es: " + getField(cursor.x, cursor.y), // position of field?
+            "Заряд поля: " + getField(cursor.x, cursor.y),
             cursor.x,
             cursor.y
         );
     }
     updateData();
-
-    //document.getElementById("p").innerHTML = ""+(Math.sqrt(Math.pow(last.acc.x, 2) + Math.pow(last.acc.y, 2)));
 }
 
 function getContext(c) {
