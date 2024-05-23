@@ -94,3 +94,8 @@ canvas {
 .mobile-buttons button {
 	margin: 2px;
 }
+
+.k-inp {
+	display: flex;
+	flex-direction: column;
+}

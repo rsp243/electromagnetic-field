@@ -139,8 +139,8 @@ function draw() {
     if (showFl) {
         let max = 0;
         let accs = [];
-        let rows = parseInt(C.height / flSize);
-        let cols = parseInt(C.width / flSize);
+        let rows = Math.ceil(parseFloat(C.height / flSize));
+        let cols = Math.ceil(parseFloat(C.width / flSize));
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < cols; j++) {
                 let ac = Math.abs(getField(j * flSize, i * flSize));
@@ -181,7 +181,7 @@ function draw() {
     if (pause) {
         ctx.fillStyle = "black";
         ctx.fillText(
-            "Заряд поля: " + getField(cursor.x, cursor.y),
+            "Напряженность поля: " + getField(cursor.x, cursor.y),
             cursor.x,
             cursor.y
         );

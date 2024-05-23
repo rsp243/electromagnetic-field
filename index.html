@@ -48,13 +48,22 @@
                         </tr>
                         <tr>
                             <th scope="row">K</th>
-                            <td align="center">
+                            <td class="k-inp" valign="middle" align="center">
                                 <input
-                                    class="mx-auto"
+                                    class="k-num"
+                                    type="number"
+                                    min="0.1"
+                                    max="50000"
+                                    step="1"
+                                    value="10000"
+                                    oninput="setConstant(this.value)">
+                                <input
+                                    class="k-range"
                                     type="range"
                                     min="0.1"
-                                    max="100000"
-                                    step="0.1"
+                                    max="50000"
+                                    step="1"
+                                    value="10000"
                                     oninput="setConstant(this.value)"
                                 />
                             </td>

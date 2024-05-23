@@ -1,6 +1,9 @@
-function setshowFl(e) {
-    showFl = e.srcElement.checked;
-}
+$('.k-range').change(function (){
+    $('.k-num').val($(this).val());
+});
+$('.k-num').keyup(function (){
+    $('.k-range').val($(this).val());
+});
 
 function setConstant(k) {
     if (modeA == 0) {
